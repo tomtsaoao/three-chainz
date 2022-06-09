@@ -28,4 +28,13 @@ impl App {
         };
         self.blocks.push(genesis_block);
     }
+
+    fn try_add_block(&mut self, block: Block) {
+        let latest_block = self.blocks.last().expect("there is at least 1 block")l;
+        if self.is_block_valid(&block, latest_block) {
+            self.blocks.push(block);
+        } else {
+            error! ("could not add block - invalid");
+        }
+    }
 }
